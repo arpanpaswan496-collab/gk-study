@@ -166,7 +166,7 @@
             color: var(--text-muted);
         }
 
-        /* Instagram Section Card Style to fill empty space elegantly */
+        /* Instagram Section Card Style */
         .insta-section-card {
             background: linear-gradient(145deg, #171c2b, #111522);
             border: 1px solid rgba(220, 39, 67, 0.2);
@@ -371,7 +371,7 @@
     <div class="container">
         <!-- Selection View -->
         <div id="selection-view">
-            <!-- Feature Highlights Banner to eliminate empty space -->
+            <!-- Feature Highlights Banner -->
             <div class="features-banner">
                 <div class="feature-badge">
                     <i class="fa-solid fa-language"></i>
@@ -600,7 +600,6 @@
                 score++;
                 document.getElementById('score-indicator').innerText = `Score: ` + score;
             } else {
-                button.classList.0 = ''; // safety reset
                 button.classList.add('wrong');
                 allButtons.forEach(btn => {
                     const btnPure = btn.innerText.split(' / ')[0].trim();
