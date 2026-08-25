@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apex GK & Academic Quiz Hub</title>
+    <!-- FontAwesome for Instagram Logo Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #4f46e5;
@@ -130,6 +132,14 @@
             font-weight: 600;
         }
 
+        /* Hindi text formatting inside questions & options */
+        .hindi-text {
+            font-size: 1.1rem;
+            color: #38bdf8;
+            margin-top: 0.4rem;
+            font-weight: normal;
+        }
+
         .options-list {
             display: grid;
             gap: 12px;
@@ -220,9 +230,49 @@
             cursor: pointer;
         }
 
+        /* Moving / Floating Instagram Button Styling */
+        .insta-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .floating-insta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(220, 39, 67, 0.4);
+            animation: bounceMove 2s infinite ease-in-out;
+            transition: transform 0.3s ease;
+        }
+
+        .floating-insta-btn:hover {
+            transform: scale(1.08);
+            animation: none;
+        }
+
+        .floating-insta-btn i {
+            font-size: 1.4rem;
+        }
+
+        @keyframes bounceMove {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem;
             color: var(--text-muted);
             font-size: 0.85rem;
             border-top: 1px solid #1e293b;
@@ -244,20 +294,27 @@
             <div class="class-grid">
                 <div class="class-card" onclick="initQuiz(9)">
                     <h3>Class 9</h3>
-                    <p>20 Challenging Qs</p>
+                    <p>20 Bilingual Qs</p>
                 </div>
                 <div class="class-card" onclick="initQuiz(10)">
                     <h3>Class 10</h3>
-                    <p>20 Challenging Qs</p>
+                    <p>20 Bilingual Qs</p>
                 </div>
                 <div class="class-card" onclick="initQuiz(11)">
                     <h3>Class 11</h3>
-                    <p>20 Challenging Qs</p>
+                    <p>20 Bilingual Qs</p>
                 </div>
                 <div class="class-card" onclick="initQuiz(12)">
                     <h3>Class 12</h3>
-                    <p>20 Challenging Qs</p>
+                    <p>20 Bilingual Qs</p>
                 </div>
+            </div>
+
+            <!-- Moving Instagram Button (Replace 'devil__arpan.__' with your actual username) -->
+            <div class="insta-container">
+                <a href="https://instagram.com/devil__arpan.__" target="_blank" class="floating-insta-btn">
+                    <i class="fa-brands fa-instagram"></i> Connect with me on Instagram
+                </a>
             </div>
         </div>
 
@@ -290,92 +347,92 @@
     <script>
         const database = {
             9: [
-                {q: "Which element has the highest melting point on the periodic table?", a: "Tungsten", opt: ["Carbon", "Tungsten", "Platinum", "Iron"]},
-                {q: "The 'Line of Control' (LoC) divides which two regions?", a: "Indian and Pakistani administered Kashmir", opt: ["India and China", "Indian and Pakistani administered Kashmir", "India and Bangladesh", "Punjab and Sindh"]},
-                {q: "What is the powerhouse of a plant cell besides mitochondria?", a: "Chloroplast", opt: ["Ribosome", "Chloroplast", "Golgi Body", "Vacuole"]},
-                {q: "Who propounded the Universal Law of Gravitation?", a: "Sir Isaac Newton", opt: ["Albert Einstein", "Johannes Kepler", "Sir Isaac Newton", "Galileo Galilei"]},
-                {q: "Which layer of the atmosphere contains the ozone layer?", a: "Stratosphere", opt: ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"]},
-                {q: "What is the SI unit of pressure?", a: "Pascal", opt: ["Joule", "Pascal", "Newton", "Watt"]},
-                {q: "In which year did the French Revolution begin?", a: "1789", opt: ["1776", "1789", "1804", "1815"]},
-                {q: "What is the chemical formula for baking soda?", a: "NaHCO3", opt: ["Na2CO3", "NaHCO3", "NaOH", "NaCl"]},
-                {q: "The tropic of cancer does NOT pass through which Indian state?", a: "Odisha", opt: ["Rajasthan", "Chhattisgarh", "Odisha", "Tripura"]},
-                {q: "Which blood cells are responsible for defending the body against pathogens?", a: "White Blood Cells", opt: ["Red Blood Cells", "Platelets", "White Blood Cells", "Plasma"]},
-                {q: "What is the decimal value of binary number 1010?", a: "10", opt: ["8", "10", "12", "6"]},
-                {q: "Who wrote the famous novel 'Wings of Fire'?", a: "Dr. A.P.J. Abdul Kalam", opt: ["Chetan Bhagat", "Rabindranath Tagore", "Dr. A.P.J. Abdul Kalam", "Ruskin Bond"]},
-                {q: "What is the standard atmospheric pressure at sea level in Pascals?", a: "101,325 Pa", opt: ["100,000 Pa", "101,325 Pa", "98,100 Pa", "105,000 Pa"]},
-                {q: "Which Indian movement was launched immediately after the failure of Cripps Mission?", a: "Quit India Movement", opt: ["Non-Cooperation", "Civil Disobedience", "Quit India Movement", "Khilafat Movement"]},
-                {q: "What type of mirror is used as a rear-view mirror in vehicles?", a: "Convex mirror", opt: ["Concave mirror", "Convex mirror", "Plane mirror", "Cylindrical mirror"]},
-                {q: "What is the capital of Australia?", a: "Canberra", opt: ["Sydney", "Melbourne", "Canberra", "Perth"]},
-                {q: "What is the pH value of pure neutral water at 25°C?", a: "7", opt: ["0", "7", "14", "5"]},
-                {q: "Which mountain range separates Europe from Asia?", a: "Ural Mountains", opt: ["Alps", "Himalayas", "Ural Mountains", "Andes"]},
-                {q: "The velocity of sound is highest in which medium?", a: "Solid", opt: ["Air", "Water", "Vacuum", "Solid"]},
-                {q: "Who is known as the 'Father of Indian Constitution'?", a: "Dr. B. R. Ambedkar", opt: ["Mahatma Gandhi", "Jawaharlal Nehru", "Dr. B. R. Ambedkar", "Sardar Vallabhbhai Patel"]}
+                {q: "Which element has the highest melting point on the periodic table?", hi: "आवर्त सारणी में किस तत्व का गलनांक (melting point) सबसे अधिक है?", a: "Tungsten", opt: ["Carbon / कार्बन", "Tungsten / टंगस्टन", "Platinum / प्लेटिनम", "Iron / लोहा"]},
+                {q: "The 'Line of Control' (LoC) divides which two regions?", hi: "'नियंत्रण रेखा' (LoC) किन दो क्षेत्रों को विभाजित करती है?", a: "Indian and Pakistani administered Kashmir", opt: ["India and China / भारत और चीन", "Indian and Pakistani administered Kashmir / भारत और पाकिस्तान प्रशासित कश्मीर", "India and Bangladesh / भारत और बांग्लादेश", "Punjab and Sindh / पंजाब और सिंध"]},
+                {q: "What is the powerhouse of a plant cell besides mitochondria?", hi: "माइटोकॉन्ड्रिया के अलावा पादप कोशिका (plant cell) का पावरहाउस कौन सा है?", a: "Chloroplast", opt: ["Ribosome / राइबोसोम", "Chloroplast / क्लोरोप्लास्ट", "Golgi Body / गोल्जी बॉडी", "Vacuole / रसधानी"]},
+                {q: "Who propounded the Universal Law of Gravitation?", hi: "सार्वभौमिक गुरुत्वाकर्षण का नियम किसने प्रतिपादित किया?", a: "Sir Isaac Newton", opt: ["Albert Einstein / अल्बर्ट आइंस्टीन", "Johannes Kepler / जोहान्स केपलर", "Sir Isaac Newton / सर आइजैक न्यूटन", "Galileo Galilei / गैलीलियो गैलीली"]},
+                {q: "Which layer of the atmosphere contains the ozone layer?", hi: "वायुमंडल की किस परत में ओजोन परत पाई जाती है?", a: "Stratosphere", opt: ["Troposphere / क्षोभमंडल", "Stratosphere / समताप मंडल", "Mesosphere / मध्यमंडल", "Thermosphere / तापमंडल"]},
+                {q: "What is the SI unit of pressure?", hi: "दाब (Pressure) की SI इकाई क्या है?", a: "Pascal", opt: ["Joule / जूल", "Pascal / पास्कल", "Newton / न्यूटन", "Watt / वाट"]},
+                {q: "In which year did the French Revolution begin?", hi: "फ्रांसीसी क्रांति किस वर्ष शुरू हुई थी?", a: "1789", opt: ["1776", "1789", "1804", "1815"]},
+                {q: "What is the chemical formula for baking soda?", hi: "बेकिंग सोडा का रासायनिक सूत्र क्या है?", a: "NaHCO3", opt: ["Na2CO3", "NaHCO3", "NaOH", "NaCl"]},
+                {q: "The tropic of cancer does NOT pass through which Indian state?", hi: "कर्क रेखा (Tropic of Cancer) भारत के किस राज्य से होकर नहीं गुजरती है?", a: "Odisha", opt: ["Rajasthan / राजस्थान", "Chhattisgarh / छत्तीसगढ़", "Odisha / ओडिशा", "Tripura / त्रिपुरा"]},
+                {q: "Which blood cells are responsible for defending the body against pathogens?", hi: "कौन सी रक्त कोशिकाएं शरीर को रोगजनकों (pathogens) से बचाने के लिए जिम्मेदार हैं?", a: "White Blood Cells", opt: ["Red Blood Cells / लाल रक्त कोशिकाएं", "Platelets / प्लेटलेट्स", "White Blood Cells / श्वेत रक्त कोशिकाएं", "Plasma / प्लाज्मा"]},
+                {q: "What is the decimal value of binary number 1010?", hi: "बाइनरी संख्या 1010 का दशमलव मान क्या है?", a: "10", opt: ["8", "10", "12", "6"]},
+                {q: "Who wrote the famous novel 'Wings of Fire'?", hi: "प्रसिद्ध उपन्यास 'वििंग्स ऑफ फायर' किसने लिखा है?", a: "Dr. A.P.J. Abdul Kalam", opt: ["Chetan Bhagat / चेतन भगत", "Rabindranath Tagore / रवींद्रनाथ टैगोर", "Dr. A.P.J. Abdul Kalam / डॉ. ए.पी.जे. अब्दुल कलाम", "Ruskin Bond / रस्किन बॉन्ड"]},
+                {q: "What is the standard atmospheric pressure at sea level in Pascals?", hi: "समुद्र तल पर मानक वायुमंडलीय दाब पास्कल में कितना होता है?", a: "101,325 Pa", opt: ["100,000 Pa", "101,325 Pa", "98,100 Pa", "105,000 Pa"]},
+                {q: "Which Indian movement was launched immediately after the failure of Cripps Mission?", hi: "क्रिप्स मिशन की असफलता के तुरंत बाद कौन सा भारतीय आंदोलन शुरू किया गया था?", a: "Quit India Movement", opt: ["Non-Cooperation / असहयोग आंदोलन", "Civil Disobedience / सविनय अवज्ञा", "Quit India Movement / भारत छोड़ो आंदोलन", "Khilafat Movement / खिलाफत आंदोलन"]},
+                {q: "What type of mirror is used as a rear-view mirror in vehicles?", hi: "वाहनों में पीछे देखने के लिए (rear-view) किस प्रकार के दर्पण का उपयोग किया जाता है?", a: "Convex mirror", opt: ["Concave mirror / अवतल दर्पण", "Convex mirror / उत्तल दर्पण", "Plane mirror / समतल दर्पण", "Cylindrical mirror / बेलनाकार दर्पण"]},
+                {q: "What is the capital of Australia?", hi: "ऑस्ट्रेलिया की राजधानी क्या है?", a: "Canberra", opt: ["Sydney / सिडनी", "Melbourne / मेलबर्न", "Canberra / कैनबरा", "Perth / पर्थ"]},
+                {q: "What is the pH value of pure neutral water at 25°C?", hi: "25°C पर शुद्ध उदासीन पानी का pH मान कितना होता है?", a: "7", opt: ["0", "7", "14", "5"]},
+                {q: "Which mountain range separates Europe from Asia?", hi: "कौन सी पर्वत श्रृंखला यूरोप को एशिया से अलग करती है?", a: "Ural Mountains", opt: ["Alps / आल्प्स", "Himalayas / हिमालय", "Ural Mountains / यूराल पर्वत", "Andes / एंडीज"]},
+                {q: "The velocity of sound is highest in which medium?", hi: "ध्वनि का वेग किस माध्यम में सबसे अधिक होता है?", a: "Solid", opt: ["Air / वायु", "Water / पानी", "Vacuum / निर्वात", "Solid / ठोस"]},
+                {q: "Who is known as the 'Father of Indian Constitution'?", hi: "'भारतीय संविधान का जनक' किसे कहा जाता है?", a: "Dr. B. R. Ambedkar", opt: ["Mahatma Gandhi / महात्मा गांधी", "Jawaharlal Nehru / जवाहरलाल नेहरू", "Dr. B. R. Ambedkar / डॉ. बी. आर. अम्बेडकर", "Sardar Patel / सरदार पटेल"]}
             ],
             10: [
-                {q: "What is the product formed when ethanol reacts with hot concentrated sulfuric acid?", a: "Ethene", opt: ["Ethane", "Ethene", "Ethanoic Acid", "Ethyl Hydrogen Sulfate"]},
-                {q: "Which mirror always forms a virtual, erect, and diminished image?", a: "Convex mirror", opt: ["Concave mirror", "Convex mirror", "Plane mirror", "Parabolic mirror"]},
-                {q: "In Mendel's dihybrid cross, what is the phenotypic ratio in the F2 generation?", a: "9:3:3:1", opt: ["3:1", "1:2:1", "9:3:3:1", "1:1:1:1"]},
-                {q: "Which treaty recognized Greece as an independent nation in 1832?", a: "Treaty of Constantinople", opt: ["Treaty of Vienna", "Treaty of Constantinople", "Treaty of Versailles", "Treaty of Paris"]},
-                {q: "What is the electrical resistance of an ideal voltmeter?", a: "Infinite", opt: ["Zero", "Low", "Infinite", "Depends on voltage"]},
-                {q: "Which gland in the human body is known as the 'Master Gland'?", a: "Pituitary gland", opt: ["Thyroid gland", "Adrenal gland", "Pituitary gland", "Pancreas"]},
-                {q: "What is the chemical name of bleaching powder?", a: "Calcium oxychloride", opt: ["Calcium chloride", "Calcium oxychloride", "Calcium carbonate", "Calcium hydroxide"]},
-                {q: "The Non-Cooperation-Khilafat Movement began in which month and year?", a: "January 1921", opt: ["August 1920", "January 1921", "March 1919", "December 1922"]},
-                {q: "What is the focal length of a plane mirror?", a: "Infinite", opt: ["Zero", "Positive", "Infinite", "Negative"]},
-                {q: "Which metal exists in liquid state at room temperature?", a: "Mercury", opt: ["Gallium", "Mercury", "Sodium", "Bromine"]},
-                {q: "What is the primary function of the renal vein?", a: "Carries filtered blood away from the kidney", opt: ["Brings unfiltered blood to the kidney", "Carries filtered blood away from the kidney", "Transports urine to bladder", "Secretes renin"]},
-                {q: "Who designed the famous 'Swadeshi flag' during the national movement in 1921?", a: "Mahatma Gandhi", opt: ["Rabindranath Tagore", "Mahatma Gandhi", "Pingali Venkayya", "Jawaharlal Nehru"]},
-                {q: "What is the maximum number of electrons in the 'M' shell according to the Bohr-Bury scheme?", a: "18", opt: ["8", "18", "32", "2"]},
-                {q: "Which soil type is best suited for growing cotton?", a: "Black soil", opt: ["Red soil", "Laterite soil", "Black soil", "Alluvial soil"]},
-                {q: "What is the refractive index of diamond approximately?", a: "2.42", opt: ["1.52", "1.77", "2.42", "3.00"]},
-                {q: "Which hormone regulates blood sugar levels?", a: "Insulin", opt: ["Glucagon", "Insulin", "Thyroxine", "Adrenaline"]},
-                {q: "What type of reaction is the burning of natural gas?", a: "Exothermic", opt: ["Endothermic", "Exothermic", "Photochemical", "Displacement"]},
-                {q: "In which year was the Rowlatt Act passed?", a: "1919", opt: ["1915", "1919", "1921", "1925"]},
-                {q: "What is the power of a lens having a focal length of -20 cm?", a: "-5 D", opt: ["+5 D", "-5 D", "+2 D", "-2 D"]},
-                {q: "Which international organization publishes the Human Development Report (HDR)?", a: "UNDP", opt: ["World Bank", "IMF", "UNDP", "UNESCO"]}
+                {q: "What is the product formed when ethanol reacts with hot concentrated sulfuric acid?", hi: "एथेनॉल की गर्म सांद्र सल्फ्यूरिक एसिड के साथ प्रतिक्रिया पर कौन सा उत्पाद बनता है?", a: "Ethene", opt: ["Ethane / एथेन", "Ethene / एथीन", "Ethanoic Acid / एथेनोइक एसिड", "Ethyl Hydrogen Sulfate / एथिल हाइड्रोजन सल्फेट"]},
+                {q: "Which mirror always forms a virtual, erect, and diminished image?", hi: "कौन सा दर्पण हमेशा आभासी, सीधा और छोटा प्रतिबिंब बनाता है?", a: "Convex mirror", opt: ["Concave mirror / अवतल दर्पण", "Convex mirror / उत्तल दर्पण", "Plane mirror / समतल दर्पण", "Parabolic mirror / परवलयिक दर्पण"]},
+                {q: "In Mendel's dihybrid cross, what is the phenotypic ratio in the F2 generation?", hi: "मेंडेल के द्विसंकर क्रॉस (dihybrid cross) में F2 पीढ़ी का फेनोटाइप अनुपात क्या है?", a: "9:3:3:1", opt: ["3:1", "1:2:1", "9:3:3:1", "1:1:1:1"]},
+                {q: "Which treaty recognized Greece as an independent nation in 1832?", hi: "1832 की किस संधि ने ग्रीस को एक स्वतंत्र राष्ट्र के रूप में मान्यता दी?", a: "Treaty of Constantinople", opt: ["Treaty of Vienna / वियना की संधि", "Treaty of Constantinople / कॉन्स्टेंटिनोपल की संधि", "Treaty of Versailles / वर्साय की संधि", "Treaty of Paris / पेरिस की संधि"]},
+                {q: "What is the electrical resistance of an ideal voltmeter?", hi: "एक आदर्श वोल्टमीटर का विद्युत प्रतिरोध (electrical resistance) कितना होता है?", a: "Infinite", opt: ["Zero / शून्य", "Low / कम", "Infinite / अनंत", "Depends on voltage / वोल्टेज पर निर्भर करता है"]},
+                {q: "Which gland in the human body is known as the 'Master Gland'?", hi: "मानव शरीर की किस ग्रंथि को 'मास्टर ग्रंथि' कहा जाता है?", a: "Pituitary gland", opt: ["Thyroid gland / थायरॉयड ग्रंथि", "Adrenal gland / एड्रिनल ग्रंथि", "Pituitary gland / पिट्यूटरी (पीयूष) ग्रंथि", "Pancreas / अग्न्याशय"]},
+                {q: "What is the chemical name of bleaching powder?", hi: "ब्रीचिंग पाउडर का रासायनिक नाम क्या है?", a: "Calcium oxychloride", opt: ["Calcium chloride / कैल्शियम क्लोराइड", "Calcium oxychloride / कैल्शियम ऑक्सीक्लोराइड", "Calcium carbonate / कैल्शियम कार्बोनेट", "Calcium hydroxide / कैल्शियम हाइड्रोक्साइड"]},
+                {q: "The Non-Cooperation-Khilafat Movement began in which month and year?", hi: "असहयोग-खिलाफत आंदोलन किस महीने और वर्ष में शुरू हुआ था?", a: "January 1921", opt: ["August 1920 / अगस्त 1920", "January 1921 / जनवरी 1921", "March 1919 / मार्च 1919", "December 1922 / दिसंबर 1922"]},
+                {q: "What is the focal length of a plane mirror?", hi: "समतल दर्पण की फोकस दूरी (focal length) कितनी होती है?", a: "Infinite", opt: ["Zero / शून्य", "Positive / धनात्मक", "Infinite / अनंत", "Negative / ऋणात्मक"]},
+                {q: "Which metal exists in liquid state at room temperature?", hi: "कौन सी धातु कमरे के तापमान पर तरल अवस्था में मौजूद होती है?", a: "Mercury", opt: ["Gallium / गैलियम", "Mercury / पारा", "Sodium / सोडियम", "Bromine / ब्रोमीन"]},
+                {q: "What is the primary function of the renal vein?", hi: "गुर्दे की शिरा (renal vein) का मुख्य कार्य क्या है?", a: "Carries filtered blood away from the kidney", opt: ["Brings unfiltered blood to the kidney / अशुद्ध रक्त लाना", "Carries filtered blood away from the kidney / गुर्दे से छना हुआ रक्त बाहर ले जाना", "Transports urine to bladder / मूत्र ले जाना", "Secretes renin / रेनिन स्रावित करना"]},
+                {q: "Who designed the famous 'Swadeshi flag' during the national movement in 1921?", hi: "1921 में राष्ट्रीय आंदोलन के दौरान प्रसिद्ध 'स्वदेशी झंडा' किसने डिज़ाइन किया था?", a: "Mahatma Gandhi", opt: ["Rabindranath Tagore / रवींद्रनाथ टैगोर", "Mahatma Gandhi / महात्मा गांधी", "Pingali Venkayya / पिंगलि वेंकैया", "Jawaharlal Nehru / जवाहरलाल नेहरू"]},
+                {q: "What is the maximum number of electrons in the 'M' shell according to the Bohr-Bury scheme?", hi: "बोर-बरी योजना के अनुसार 'M' शेल में इलेक्ट्रॉनों की अधिकतम संख्या कितनी होती है?", a: "18", opt: ["8", "18", "32", "2"]},
+                {q: "Which soil type is best suited for growing cotton?", hi: "कपास उगाने के लिए कौन सी मिट्टी सबसे उपयुक्त है?", a: "Black soil", opt: ["Red soil / लाल मिट्टी", "Laterite soil / लैटेराइट मिट्टी", "Black soil / काली मिट्टी", "Alluvial soil / जलोढ़ मिट्टी"]},
+                {q: "What is the refractive index of diamond approximately?", hi: "हीरे का अपवर्तनांक (refractive index) लगभग कितना होता है?", a: "2.42", opt: ["1.52", "1.77", "2.42", "3.00"]},
+                {q: "Which hormone regulates blood sugar levels?", hi: "कौन सा हार्मोन रक्त शर्करा के स्तर को नियंत्रित करता है?", a: "Insulin", opt: ["Glucagon / ग्लूकागन", "Insulin / इंसुलिन", "Thyroxine / थायरोक्सिन", "Adrenaline / एड्रेनालाईन"]},
+                {q: "What type of reaction is the burning of natural gas?", hi: "प्राकृतिक गैस का जलना किस प्रकार की प्रतिक्रिया है?", a: "Exothermic", opt: ["Endothermic / ऊष्माशोषी", "Exothermic / ऊष्माक्षेपी", "Photochemical / फोटोकैमिकल", "Displacement / विस्थापन"]},
+                {q: "In which year was the Rowlatt Act passed?", hi: "रॉलेट एक्ट किस वर्ष पारित किया गया था?", a: "1919", opt: ["1915", "1919", "1921", "1925"]},
+                {q: "What is the power of a lens having a focal length of -20 cm?", hi: "-20 सेमी फोकस दूरी वाले लेंस की क्षमता (power) क्या होगी?", a: "-5 D", opt: ["+5 D", "-5 D", "+2 D", "-2 D"]},
+                {q: "Which international organization publishes the Human Development Report (HDR)?", hi: "मानव विकास रिपोर्ट (HDR) कौन सा अंतर्राष्ट्रीय संगठन प्रकाशित करता है?", a: "UNDP", opt: ["World Bank / विश्व बैंक", "IMF / अंतर्राष्ट्रीय मुद्रा कोष", "UNDP / संयुक्त राष्ट्र विकास कार्यक्रम", "UNESCO / यूनेस्को"]}
             ],
             11: [
-                {q: "What is the dimensionality of universal gravitational constant (G)?", a: "[M^-1 L^3 T^-2]", opt: ["[M L^2 T^-2]", "[M^-1 L^3 T^-2]", "[M L^-2 T^-2]", "[M^-1 L^2 T^-2]"]},
-                {q: "Which cell organelle is devoid of a membrane?", a: "Ribosome", opt: ["Lysosome", "Nucleus", "Ribosome", "Endoplasmic Reticulum"]},
-                {q: "What is the oxidation state of Chromium in K2Cr2O7?", a: "+6", opt: ["+3", "+6", "+7", "+2"]},
-                {q: "What type of economic system is characterized by central planning?", a: "Socialist economy", opt: ["Capitalist economy", "Socialist economy", "Mixed economy", "Free-market economy"]},
-                {q: "According to the Aufbau principle, electrons fill orbitals in order of increasing:", a: "(n + l)", opt: ["n only", "l only", "(n + l)", "(n - l)"]},
-                {q: "What is the common name of Solid CO2?", a: "Dry ice", opt: ["Quicklime", "Dry ice", "Laughing gas", "Potash alum"]},
-                {q: "Which plant hormone induces dormancy in seeds and buds?", a: "Abscisic acid", opt: ["Auxin", "Gibberellin", "Cytokinin", "Abscisic acid"]},
-                {q: "What is the term for the total volume of air a person can exhale after maximum inhalation?", a: "Vital capacity", opt: ["Tidal volume", "Residual volume", "Vital capacity", "Total lung capacity"]},
-                {q: "Who is recognized as the father of modern taxonomy?", a: "Carolus Linnaeus", opt: ["Aristotle", "Charles Darwin", "Carolus Linnaeus", "Gregor Mendel"]},
-                {q: "What is the value of gas constant R in SI units (J mol^-1 K^-1)?", a: "8.314", opt: ["0.0821", "8.314", "1.987", "6.022"]},
-                {q: "In a thermodynamic process, work done is path independent if the process is:", a: "Not possible, work is always path dependent", opt: ["Isothermal", "Adiabatic", "Isobaric", "Not possible, work is always path dependent"]},
-                {q: "Which article of the Indian Constitution deals with the Right to Equality?", a: "Article 14-18", opt: ["Article 12-35", "Article 14-18", "Article 19-22", "Article 32"]},
-                {q: "What is the chemical name of oil of vitriol?", a: "Sulfuric acid", opt: ["Hydrochloric acid", "Nitric acid", "Sulfuric acid", "Phosphoric acid"]},
-                {q: "What is the primary currency of economic stability measured by the Central Bank?", a: "Money supply", opt: ["Inflation rate", "Money supply", "Foreign exchange", "Tax revenues"]},
-                {q: "What is the angle between centripetal acceleration and tangential acceleration?", a: "90 degrees", opt: ["0 degrees", "45 degrees", "90 degrees", "180 degrees"]},
-                {q: "Which enzyme is responsible for the fixation of CO2 in C3 plants?", a: "RuBisCO", opt: ["Hexokinase", "RuBisCO", "Pepcase", "Amylase"]},
-                {q: "What happens to the kinetic energy of an ideal gas when absolute temperature is doubled?", a: "Doubled", opt: ["Quadrupled", "Halved", "Doubled", "Remains unchanged"]},
-                {q: "Which type of bonding is present in ice crystals?", a: "Hydrogen bonding", opt: ["Ionic bonding", "Covalent bonding", "Hydrogen bonding", "Metallic bonding"]},
-                {q: "What is the nodal agency for calculating GDP in India?", a: "NSO (National Statistical Office)", opt: ["RBI", "Ministry of Finance", "NSO (National Statistical Office)", "NITI Aayog"]},
-                {q: "What is the coefficient of restitution for a perfectly elastic collision?", a: "1", opt: ["0", "0.5", "1", "Infinity"]}
+                {q: "What is the dimensionality of universal gravitational constant (G)?", hi: "सार्वभौमिक गुरुत्वाकर्षण स्थिरांक (G) की विमा (dimension) क्या है?", a: "[M^-1 L^3 T^-2]", opt: ["[M L^2 T^-2]", "[M^-1 L^3 T^-2]", "[M L^-2 T^-2]", "[M^-1 L^2 T^-2]"]},
+                {q: "Which cell organelle is devoid of a membrane?", hi: "किस कोशिका अंगक (cell organelle) में झिल्ली (membrane) नहीं होती है?", a: "Ribosome", opt: ["Lysosome / लाइसोसोम", "Nucleus / केंद्रक", "Ribosome / राइबोसोम", "Endoplasmic Reticulum / अंतःप्रद्रव्यी जालिका"]},
+                {q: "What is the oxidation state of Chromium in K2Cr2O7?", hi: "K2Cr2O7 में क्रोमियम की ऑक्सीकरण अवस्था (oxidation state) क्या है?", a: "+6", opt: ["+3", "+6", "+7", "+2"]},
+                {q: "What type of economic system is characterized by central planning?", hi: "केंद्रीय नियोजन (central planning) किस प्रकार की आर्थिक प्रणाली की विशेषता है?", a: "Socialist economy", opt: ["Capitalist economy / पूंजीवादी अर्थव्यवस्था", "Socialist economy / समाजवादी अर्थव्यवस्था", "Mixed economy / मिश्रित अर्थव्यवस्था", "Free-market economy / मुक्त बाजार अर्थव्यवस्था"]},
+                {q: "According to the Aufbau principle, electrons fill orbitals in order of increasing:", hi: "आफbau सिद्धांत के अनुसार, इलेक्ट्रॉन किस क्रम में ऑर्बिटल्स में भरते हैं?", a: "(n + l)", opt: ["n only", "l only", "(n + l)", "(n - l)"]},
+                {q: "What is the common name of Solid CO2?", hi: "ठोस CO2 का सामान्य नाम क्या है?", a: "Dry ice", opt: ["Quicklime / बिना बुझा चूना", "Dry ice / सूखी बर्फ (ड्राई आइस)", "Laughing gas / लाफिंग गैस", "Potash alum / फिटकरी"]},
+                {q: "Which plant hormone induces dormancy in seeds and buds?", hi: "कौन सा पादप हार्मोन बीजों और कलियों में प्रसुप्ति (dormancy) को प्रेरित करता है?", a: "Abscisic acid", opt: ["Auxin / ऑक्जीन", "Gibberellin / जिबरेलिन", "Cytokinin / साइटोकाइनिन", "Abscisic acid / एब्सिसिक एसिड"]},
+                {q: "What is the term for the total volume of air a person can exhale after maximum inhalation?", hi: "अधिकतम सांस लेने के बाद कोई व्यक्ति जितनी कुल हवा बाहर छोड़ सकता है, उसे क्या कहते हैं?", a: "Vital capacity", opt: ["Tidal volume / ज्वारीय आयतन", "Residual volume / अवशिष्ट आयतन", "Vital capacity / जीवन क्षमता (वाइटल कैपेसिटी)", "Total lung capacity / कुल फेफड़ों की क्षमता"]},
+                {q: "Who is recognized as the father of modern taxonomy?", hi: "आधुनिक वर्गीकरण विज्ञान (taxonomy) के जनक के रूप में किसे मान्यता प्राप्त है?", a: "Carolus Linnaeus", opt: ["Aristotle / अरस्तू", "Charles Darwin / चार्ल्स डार्विन", "Carolus Linnaeus / कैरोलस लिनियस", "Gregor Mendel / ग्रेगर मेंडेल"]},
+                {q: "What is the value of gas constant R in SI units (J mol^-1 K^-1)?", hi: "SI इकाइयों में गैस स्थिरांक R का मान कितना होता है?", a: "8.314", opt: ["0.0821", "8.314", "1.987", "6.022"]},
+                {q: "In a thermodynamic process, work done is path independent if the process is:", hi: "ऊष्मप्रवैगिकी (thermodynamic) प्रक्रिया में किया गया कार्य पथ पर निर्भर नहीं करता यदि प्रक्रिया कैसी हो?", a: "Not possible, work is always path dependent", opt: ["Isothermal / समतापीय", "Adiabatic / रुद्धोष्म", "Isobaric / समदाबी", "Not possible, work is always path dependent / संभव नहीं, कार्य हमेशा पथ पर निर्भर करता है"]},
+                {q: "Which article of the Indian Constitution deals with the Right to Equality?", hi: "भारतीय संविधान का कौन सा अनुच्छेद 'समानता के अधिकार' से संबंधित है?", a: "Article 14-18", opt: ["Article 12-35 / अनुच्छेद 12-35", "Article 14-18 / अनुच्छेद 14-18", "Article 19-22 / अनुच्छेद 19-22", "Article 32 / अनुच्छेद 32"]},
+                {q: "What is the chemical name of oil of vitriol?", hi: "'ऑयल ऑफ विट्रॉल' (Oil of Vitriol) का रासायनिक नाम क्या है?", a: "Sulfuric acid", opt: ["Hydrochloric acid / हाइड्रोक्लोरिक एसिड", "Nitric acid / नाइट्रिक एसिड", "Sulfuric acid / सल्फ्यूरिक एसिड", "Phosphoric acid / फॉस्फोरिक एसिड"]},
+                {q: "What is the primary currency of economic stability measured by the Central Bank?", hi: "केंद्रीय बैंक द्वारा मापी जाने वाली आर्थिक स्थिरता की प्राथमिक मुद्रा क्या है?", a: "Money supply", opt: ["Inflation rate / मुद्रास्फीति दर", "Money supply / मुद्रा आपूर्ति", "Foreign exchange / विदेशी मुद्रा", "Tax revenues / कर राजस्व"]},
+                {q: "What is the angle between centripetal acceleration and tangential acceleration?", hi: "अभिकेंद्री त्वरण (centripetal acceleration) और स्पर्शीय त्वरण के बीच का कोण कितना होता है?", a: "90 degrees", opt: ["0 degrees / 0 डिग्री", "45 degrees / 45 डिग्री", "90 degrees / 90 डिग्री", "180 degrees / 180 डिग्री"]},
+                {q: "Which enzyme is responsible for the fixation of CO2 in C3 plants?", hi: "C3 पौधों में CO2 के स्थिरीकरण के लिए कौन सा एंजाइम जिम्मेदार है?", a: "RuBisCO", opt: ["Hexokinase / हेक्सोकाइनेज", "RuBisCO / रुबिस्को", "Pepcase / पेपकेज", "Amylase / एमाइलेज"]},
+                {q: "What happens to the kinetic energy of an ideal gas when absolute temperature is doubled?", hi: "जब किसी आदर्श गैस का परम तापमान दोगुना कर दिया जाए, तो उसकी गतिज ऊर्जा (kinetic energy) का क्या होता है?", a: "Doubled", opt: ["Quadrupled / चौगुनी हो जाती है", "Halved / आधी हो जाती है", "Doubled / दोगुनी हो जाती है", "Remains unchanged / अपरिवर्तित रहती है"]},
+                {q: "Which type of bonding is present in ice crystals?", hi: "बर्फ के क्रिस्टल में किस प्रकार का बंधन मौजूद होता है?", a: "Hydrogen bonding", opt: ["Ionic bonding / आयनिक बंधन", "Covalent bonding / सहसंयोजक बंधन", "Hydrogen bonding / हाइड्रोजन बंधन", "Metallic bonding / धात्विक बंधन"]},
+                {q: "What is the nodal agency for calculating GDP in India?", hi: "भारत में GDP की गणना करने वाली नोडल एजेंसी कौन सी है?", a: "NSO (National Statistical Office)", opt: ["RBI / आरबीआई", "Ministry of Finance / वित्त मंत्रालय", "NSO (राष्ट्रीय सांख्यकीय कार्यालय)", "NITI Aayog / नीति आयोग"]},
+                {q: "What is the coefficient of restitution for a perfectly elastic collision?", hi: "पूर्णतः प्रत्यास्थ टक्कर (perfectly elastic collision) के लिए प्रत्यवस्थान गुणांक (coefficient of restitution) क्या होता है?", a: "1", opt: ["0", "0.5", "1", "Infinity / अनंत"]}
             ],
             12: [
-                {q: "What is the hybridization of carbon in a diamond crystal lattice?", a: "sp3", opt: ["sp", "sp2", "sp3", "sp3d"]},
-                {q: "Which electromagnetic waves are used in RADAR systems for aircraft navigation?", a: "Microwaves", opt: ["Radio waves", "Microwaves", "Infrared waves", "X-rays"]},
-                {q: "What is the net electric flux through a closed surface enclosing an electric dipole?", a: "Zero", opt: ["Maximum", "Zero", "Dependent on dipole moment", "Infinite"]},
-                {q: "What is the primary neurotransmitter at the neuromuscular junction in humans?", a: "Acetylcholine", opt: ["Dopamine", "Serotonin", "Acetylcholine", "Adrenaline"]},
-                {q: "Which enzyme catalyses the replication of DNA strands?", a: "DNA polymerase", opt: ["RNA polymerase", "DNA ligase", "DNA polymerase", "Helicase"]},
-                {q: "What is the IUPAC name of acetone?", a: "Propan-2-one", opt: ["Propanal", "Propan-2-one", "Propan-1-ol", "Propanone-2"]},
-                {q: "In an N-type semiconductor, the majority charge carriers are:", a: "Electrons", opt: ["Holes", "Electrons", "Protons", "Neutrons"]},
-                {q: "Which constitutional amendment is known as the 'Mini Constitution' of India?", a: "42nd Amendment", opt: ["44th Amendment", "42nd Amendment", "86th Amendment", "73rd Amendment"]},
-                {q: "What is the product of mass and acceleration in relativistic mechanics at speeds close to light?", a: "Force", opt: ["Momentum change rate", "Force", "Constant value", "Zero"]},
-                {q: "Which deficiency disease is caused by lack of Vitamin B12?", a: "Pernicious anemia", opt: ["Scurvy", "Beriberi", "Pernicious anemia", "Rickets"]},
-                {q: "What is the coordination number of Na+ in NaCl crystal structure?", a: "6", opt: ["4", "6", "8", "12"]},
-                {q: "What type of lens system is used to correct myopia (nearsightedness)?", a: "Concave lens", opt: ["Convex lens", "Concave lens", "Cylindrical lens", "Bifocal lens"]},
-                {q: "Which macroeconomic policy tool is controlled directly by commercial banks?", a: "None, tools are controlled by the Central Bank", opt: ["Repo rate", "Cash Reserve Ratio", "None, tools are controlled by the Central Bank", "Open market operations"]},
-                {q: "What is the value of the magnetic susceptibility of a diamagnetic substance?", a: "Small and negative", opt: ["Large and positive", "Small and positive", "Small and negative", "Zero"]},
-                {q: "Which type of ecological pyramid is always upright?", a: "Pyramid of Energy", opt: ["Pyramid of Number", "Pyramid of Biomass", "Pyramid of Energy", "All types can invert"]},
-                {q: "What is the major product formed when alkyl halide reacts with alcoholic KOH?", a: "Alkene", opt: ["Alkane", "Alkene", "Alkyne", "Ether"]},
-                {q: "What is the threshold frequency of a photoelectric surface dependent upon?", a: "Nature of the metal surface", opt: ["Intensity of incident light", "Frequency of incident light", "Nature of the metal surface", "Distance from source"]},
-                {q: "Who drafted the Objectives Resolution in the Constituent Assembly?", a: "Jawaharlal Nehru", opt: ["Dr. B. R. Ambedkar", "Jawaharlal Nehru", "Sardar Patel", "Rajendra Prasad"]},
-                {q: "What is the half-life of a first-order reaction proportional to?", a: "Independent of initial concentration", opt: ["Initial concentration", "Inverse of initial concentration", "Independent of initial concentration", "Square of initial concentration"]},
-                {q: "Which international monetary body acts as the 'lender of last resort'?", a: "International Monetary Fund (IMF)", opt: ["World Bank", "International Monetary Fund (IMF)", "WTO", "Asian Development Bank"]}
+                {q: "What is the hybridization of carbon in a diamond crystal lattice?", hi: "हीरे के क्रिस्टल जालक (crystal lattice) में कार्बन का संकरण (hybridization) क्या होता है?", a: "sp3", opt: ["sp", "sp2", "sp3", "sp3d"]},
+                {q: "Which electromagnetic waves are used in RADAR systems for aircraft navigation?", hi: "विमान नेविगेशन के लिए रडार (RADAR) प्रणालियों में किन विद्युत चुम्बकीय तरंगों का उपयोग किया जाता है?", a: "Microwaves", opt: ["Radio waves / रेडियो तरंगें", "Microwaves / सूक्ष्म तरंगें (माइक्रोवेव)", "Infrared waves / अवरक्त तरंगें", "X-rays / एक्स-रे"]},
+                {q: "What is the net electric flux through a closed surface enclosing an electric dipole?", hi: "एक विद्युत द्विध्रुव को घेरने वाली बंद सतह से कुल विद्युत फ्लक्स कितना होता है?", a: "Zero", opt: ["Maximum / अधिकतम", "Zero / शून्य", "Dependent on dipole moment / द्विध्रुव आघूर्ण पर निर्भर", "Infinite / अनंत"]},
+                {q: "What is the primary neurotransmitter at the neuromuscular junction in humans?", hi: "मनुष्यों में न्यूरोमस्कुलर जंक्शन पर प्राथमिक न्यूरोट्रांसमीटर कौन सा है?", a: "Acetylcholine", opt: ["Dopamine / डोपामाइन", "Serotonin / सेरोटोनिन", "Acetylcholine / एसिटيلकोलाइन", "Adrenaline / एड्रेनालाईन"]},
+                {q: "Which enzyme catalyses the replication of DNA strands?", hi: "कौन सा एंजाइम DNA स्ट्रैंड्स के प्रतिकृति (replication) को उत्प्रेरित करता है?", a: "DNA polymerase", opt: ["RNA polymerase / आरएनए पोलीमरेज़", "DNA ligase / डीएनए लिगेज", "DNA polymerase / डीएनए पोलीमरेज़", "Helicase / हेलीकेस"]},
+                {q: "What is the IUPAC name of acetone?", hi: "एसीटोन का IUPAC नाम क्या है?", a: "Propan-2-one", opt: ["Propanal / प्रोपेनल", "Propan-2-one / प्रोपेन-2-ओन", "Propan-1-ol / प्रोपेन-1-ऑल", "Propanone-2 / प्रोपेनोन-2"]},
+                {q: "In an N-type semiconductor, the majority charge carriers are:", hi: "N-प्रकार के अर्धचालक (semiconductor) में बहुसंख्यक आवेश वाहक (majority carriers) कौन होते हैं?", a: "Electrons", opt: ["Holes / कोटर (होल्स)", "Electrons / इलेक्ट्रॉन", "Protons / प्रोटॉन", "Neutrons / न्यूट्रॉन"]},
+                {q: "Which constitutional amendment is known as the 'Mini Constitution' of India?", hi: "भारतीय संविधान के किस संशोधन को 'मिनी संविधान' के रूप में जाना जाता है?", a: "42nd Amendment", opt: ["44th Amendment / 44वां संशोधन", "42nd Amendment / 42वां संशोधन", "86th Amendment / 86वां संशोधन", "73rd Amendment / 73वां संशोधन"]},
+                {q: "What is the product of mass and acceleration in relativistic mechanics at speeds close to light?", hi: "प्रकाश के करीब गति पर आपेक्षिक यांत्रिकी (relativistic mechanics) में द्रव्यमान और त्वरण का उत्पाद क्या होता है?", a: "Force", opt: ["Momentum change rate / संवेग परिवर्तन की दर", "Force / बल", "Constant value / स्थिर मान", "Zero / शून्य"]},
+                {q: "Which deficiency disease is caused by lack of Vitamin B12?", hi: "विटामिन B12 की कमी के कारण कौन सा हीनता रोग (deficiency disease) होता है?", a: "Pernicious anemia", opt: ["Scurvy / स्कर्वी", "Beriberi / बेरीबेरी", "Pernicious anemia / पर्नीसियस एनीमिया (घातक रक्ताल्पता)", "Rickets / रिकेट्स"]},
+                {q: "What is the coordination number of Na+ in NaCl crystal structure?", hi: "NaCl क्रिस्टल संरचना में Na+ की उपसहसंयोजन संख्या (coordination number) क्या है?", a: "6", opt: ["4", "6", "8", "12"]},
+                {q: "What type of lens system is used to correct myopia (nearsightedness)?", hi: "निकट दृष्टि दोष (मायोपिया) को ठीक करने के लिए किस प्रकार के लेंस सिस्टम का उपयोग किया जाता है?", a: "Concave lens", opt: ["Convex lens / उत्तल लेंस", "Concave lens / अवतल लेंस", "Cylindrical lens / बेलनाकार लेंस", "Bifocal lens / बाइफोकल लेंस"]},
+                {q: "Which macroeconomic policy tool is controlled directly by commercial banks?", hi: "व्यापारी बैंकों (commercial banks) द्वारा सीधे किस समष्टिगत आर्थिक नीति उपकरण को नियंत्रित किया जाता है?", a: "None, tools are controlled by the Central Bank", opt: ["Repo rate / रेपो रेट", "Cash Reserve Ratio / नगद आरक्षित अनुपात", "None, tools are controlled by the Central Bank / कोई नहीं, उपकरण केंद्रीय बैंक द्वारा नियंत्रित होते हैं", "Open market operations / खुले बाजार की गतिविधियां"]},
+                {q: "What is the value of the magnetic susceptibility of a diamagnetic substance?", hi: "प्रतिचुंबकीय पदार्थ (diamagnetic substance) की चुंबकीय प्रवृत्ति (magnetic susceptibility) का मान क्या होता है?", a: "Small and negative", opt: ["Large and positive / बड़ी और सकारात्मक", "Small and positive / छोटी और सकारात्मक", "Small and negative / छोटी और नकारात्मक", "Zero / शून्य"]},
+                {q: "Which type of ecological pyramid is always upright?", hi: "किस प्रकार का पारिस्थितिक पिरामिड हमेशा सीधा (upright) होता है?", a: "Pyramid of Energy", opt: ["Pyramid of Number / संख्या का पिरामिड", "Pyramid of Biomass / बायोमास का पिरामिड", "Pyramid of Energy / ऊर्जा का पिरामिड", "All types can invert / सभी प्रकार उल्टे हो सकते हैं"]},
+                {q: "What is the major product formed when alkyl halide reacts with alcoholic KOH?", hi: "एल्किल हैलाइड की अल्कोहलिक KOH के साथ प्रतिक्रिया होने पर मुख्य उत्पाद क्या बनता है?", a: "Alkene", opt: ["Alkane / एल्केन", "Alkene / एल्कीन", "Alkyne / एल्काइन", "Ether / ईथर"]},
+                {q: "What is the threshold frequency of a photoelectric surface dependent upon?", hi: "प्रकाश विद्युत सतह (photoelectric surface) की देहली आवृत्ति (threshold frequency) किस पर निर्भर करती है?", a: "Nature of the metal surface", opt: ["Intensity of incident light / आपतित प्रकाश की तीव्रता", "Frequency of incident light / आपतित प्रकाश की आवृत्ति", "Nature of the metal surface / धातु की सतह की प्रकृति", "Distance from source / स्रोत से दूरी"]},
+                {q: "Who drafted the Objectives Resolution in the Constituent Assembly?", hi: "संविधान सभा में उद्देश्य प्रस्ताव (Objectives Resolution) का मसौदा किसने तैयार किया था?", a: "Jawaharlal Nehru", opt: ["Dr. B. R. Ambedkar / डॉ. बी. आर. अम्बेडकर", "Jawaharlal Nehru / जवाहरलाल नेहरू", "Sardar Patel / सरदार पटेल", "Rajendra Prasad / राजेंद्र प्रसाद"]},
+                {q: "What is the half-life of a first-order reaction proportional to?", hi: "प्रथम कोटि की प्रतिक्रिया (first-order reaction) का अर्ध-जीवन (half-life) किसके समानुपाती होता है?", a: "Independent of initial concentration", opt: ["Initial concentration / प्रारंभिक सांद्रता", "Inverse of initial concentration / प्रारंभिक सांद्रता का व्युत्क्रम", "Independent of initial concentration / प्रारंभिक सांद्रता से स्वतंत्र", "Square of initial concentration / प्रारंभिक सांद्रता का वर्ग"]},
+                {q: "Which international monetary body acts as the 'lender of last resort'?", hi: "कौन सा अंतर्राष्ट्रीय मौद्रिक निकाय 'अंतिम ऋणदाता' (lender of last resort) के रूप में कार्य करता है?", a: "International Monetary Fund (IMF)", opt: ["World Bank / विश्व बैंक", "International Monetary Fund (IMF) / अंतर्राष्ट्रीय मुद्रा कोष", "WTO / विश्व व्यापार संगठन", "Asian Development Bank / एशियाई विकास बैंक"]}
             ]
         };
 
@@ -410,8 +467,10 @@
             document.getElementById('next-btn').style.display = 'none';
             
             const currentQ = activeQuestions[questionIndex];
+            
+            // Displaying English + Hindi Question
             document.getElementById('progress-indicator').innerText = `Question ${questionIndex + 1} of ${activeQuestions.length}`;
-            document.getElementById('question-text').innerText = `Q${questionIndex + 1}: ${currentQ.q}`;
+            document.getElementById('question-text').innerHTML = `Q${questionIndex + 1}: ${currentQ.q}<br><span class="hindi-text">${currentQ.hi}</span>`;
 
             const container = document.getElementById('options-container');
             container.innerHTML = '';
@@ -424,7 +483,11 @@
                 const btn = document.createElement('button');
                 btn.className = 'option-btn';
                 btn.innerText = optText;
-                btn.onclick = () => selectOption(btn, optText, currentQ.a);
+                
+                // Extracting main English value for matching check
+                const pureAnswer = optText.split(' / ')[0].trim();
+                
+                btn.onclick = () => selectOption(btn, pureAnswer, currentQ.a);
                 container.appendChild(btn);
             });
         }
@@ -438,11 +501,12 @@
             if (chosen === correct) {
                 button.classList.add('correct');
                 score++;
-                document.getElementById('score-indicator').innerText = `Score: ${score}`;
+                document.getElementById('score-indicator').innerText = `Score: ` + score;
             } else {
                 button.classList.add('wrong');
                 allButtons.forEach(btn => {
-                    if (btn.innerText === correct) {
+                    const btnPure = btn.innerText.split(' / ')[0].trim();
+                    if (btnPure === correct) {
                         btn.classList.add('correct');
                     }
                 });
