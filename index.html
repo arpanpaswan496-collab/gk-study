@@ -3,178 +3,472 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GK Study Hub - Classes 9 to 12</title>
+    <title>Apex GK & Academic Quiz Hub</title>
     <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #7c3aed;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --error: #ef4444;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
+
         body {
-            background-color: #f4f7f6;
-            color: #333;
-            line-height: 1.6;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
+
         header {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             text-align: center;
             padding: 2.5rem 1rem;
+            border-bottom: 4px solid var(--accent);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
         }
+
         header h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
         header p {
             font-size: 1.1rem;
-            opacity: 0.9;
+            color: #e2e8f0;
         }
+
         .container {
             max-width: 900px;
             margin: 2rem auto;
             padding: 0 1rem;
+            flex-grow: 1;
+            width: 100%;
         }
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-        .tab-btn {
-            background: white;
-            border: 2px solid #2575fc;
-            color: #2575fc;
-            padding: 10px 20px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .tab-btn.active, .tab-btn:hover {
-            background: #2575fc;
-            color: white;
-        }
-        .content-section {
-            display: none;
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .content-section.active {
-            display: block;
-        }
-        h2 {
-            color: #2575fc;
+
+        .section-title {
+            text-align: center;
             margin-bottom: 1.5rem;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 0.5rem;
+            font-size: 1.5rem;
+            color: var(--text-muted);
         }
-        .qa-card {
-            background: #f9fbff;
-            border-left: 4px solid #2575fc;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 4px;
+
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 2rem;
         }
-        .question {
-            font-weight: bold;
-            color: #2c3e50;
+
+        .class-card {
+            background-color: var(--card-bg);
+            border: 2px solid #334155;
+            border-radius: 16px;
+            padding: 2rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .class-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 12px 20px -3px rgba(6, 182, 212, 0.2);
+        }
+
+        .class-card h3 {
+            font-size: 1.5rem;
+            color: var(--text);
             margin-bottom: 0.5rem;
         }
-        .answer {
-            color: #27ae60;
+
+        .class-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .quiz-box {
+            display: none;
+            background-color: var(--card-bg);
+            border: 1px solid #334155;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .quiz-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid #334155;
+            padding-bottom: 1rem;
+        }
+
+        #question-text {
+            font-size: 1.35rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
             font-weight: 600;
         }
+
+        .options-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background-color: #0f172a;
+            border: 2px solid #334155;
+            color: var(--text);
+            padding: 15px 20px;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background-color: #1e293b;
+            border-color: var(--primary);
+        }
+
+        .option-btn.correct {
+            background-color: rgba(16, 185, 129, 0.2) !important;
+            border-color: var(--success) !important;
+            color: #34d399;
+        }
+
+        .option-btn.wrong {
+            background-color: rgba(239, 68, 68, 0.2) !important;
+            border-color: var(--error) !important;
+            color: #f87171;
+        }
+
+        .quiz-footer {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        #next-btn {
+            display: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        #next-btn:hover {
+            opacity: 0.9;
+        }
+
+        .result-box {
+            display: none;
+            text-align: center;
+            background-color: var(--card-bg);
+            border: 1px solid #334155;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .result-box h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .result-box p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
         footer {
             text-align: center;
-            padding: 1.5rem;
-            background: #2c3e50;
-            color: white;
-            margin-top: 3rem;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid #1e293b;
+            margin-top: auto;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>GK Study Hub</h1>
-        <p>Boost your General Knowledge for Classes 9, 10, 11 & 12</p>
+        <h1>Apex GK & Academic Hub</h1>
+        <p>Challenge Your Mind Across Mixed Disciplines (Classes 9 - 12)</p>
     </header>
 
     <div class="container">
-        <!-- Navigation Tabs -->
-        <div class="tabs">
-            <button class="tab-btn active" onclick="showTab(event, 'class9')">Class 9</button>
-            <button class="tab-btn" onclick="showTab(event, 'class10')">Class 10</button>
-            <button class="tab-btn" onclick="showTab(event, 'class11')">Class 11</button>
-            <button class="tab-btn" onclick="showTab(event, 'class12')">Class 12</button>
-        </div>
-
-        <!-- Class 9 Section -->
-        <div id="class9" class="content-section active">
-            <h2>Class 9 General Knowledge</h2>
-            <div class="qa-card">
-                <div class="question">Q1: India ka National River kaun sa hai?</div>
-                <div class="answer">Answer: Ganga</div>
-            </div>
-            <div class="qa-card">
-                <div class="question">Q2: Solar System ka sabse bada planet kaun sa hai?</div>
-                <div class="answer">Answer: Jupiter</div>
-            </div>
-        </div>
-
-        <!-- Class 10 Section -->
-        <div id="class10" class="content-section">
-            <h2>Class 10 General Knowledge</h2>
-            <div class="qa-card">
-                <div class="question">Q1: Periodic Table mein 'H' kis element ko represent karta hai?</div>
-                <div class="answer">Answer: Hydrogen</div>
-            </div>
-            <div class="qa-card">
-                <div class="question">Q2: Light year kiski unit hoti hai?</div>
-                <div class="answer">Answer: Astronomical Distance (Doori)</div>
+        <!-- Selection View -->
+        <div id="selection-view">
+            <h2 class="section-title">Select Your Grade Level</h2>
+            <div class="class-grid">
+                <div class="class-card" onclick="initQuiz(9)">
+                    <h3>Class 9</h3>
+                    <p>20 Challenging Qs</p>
+                </div>
+                <div class="class-card" onclick="initQuiz(10)">
+                    <h3>Class 10</h3>
+                    <p>20 Challenging Qs</p>
+                </div>
+                <div class="class-card" onclick="initQuiz(11)">
+                    <h3>Class 11</h3>
+                    <p>20 Challenging Qs</p>
+                </div>
+                <div class="class-card" onclick="initQuiz(12)">
+                    <h3>Class 12</h3>
+                    <p>20 Challenging Qs</p>
+                </div>
             </div>
         </div>
 
-        <!-- Class 11 Section -->
-        <div id="class11" class="content-section">
-            <h2>Class 11 General Knowledge</h2>
-            <div class="qa-card">
-                <div class="question">Q1: Indian Constitution ke creator kise mana jata hai?</div>
-                <div class="answer">Answer: Dr. B. R. Ambedkar</div>
+        <!-- Quiz Screen -->
+        <div id="quiz-box" class="quiz-box">
+            <div class="quiz-meta">
+                <span id="grade-indicator">Class 9 Quiz</span>
+                <span id="progress-indicator">Question 1 of 20</span>
+                <span id="score-indicator">Score: 0</span>
+            </div>
+            <div id="question-text">Loading question...</div>
+            <div id="options-container" class="options-list"></div>
+            <div class="quiz-footer">
+                <button id="next-btn" onclick="handleNext()">Next Question</button>
             </div>
         </div>
 
-        <!-- Class 12 Section -->
-        <div id="class12" class="content-section">
-            <h2>Class 12 General Knowledge</h2>
-            <div class="qa-card">
-                <div class="question">Q1: World Trade Organization (WTO) ka headquarters kahan hai?</div>
-                <div class="answer">Answer: Geneva, Switzerland</div>
-            </div>
+        <!-- Result Screen -->
+        <div id="result-box" class="result-box">
+            <h2>Quiz Completed!</h2>
+            <p id="final-score-text">You scored 0 out of 20.</p>
+            <button class="restart-btn" onclick="returnHome()">Back to Home</button>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 GK Study Hub. Designed for Students.</p>
+        <p>&copy; 2026 Apex GK Hub. Designed for Academic Excellence.</p>
     </footer>
 
     <script>
-        function showTab(evt, className) {
-            let sections = document.getElementsByClassName("content-section");
-            for (let i = 0; i < sections.length; i++) {
-                sections[i].classList.remove("active");
+        const database = {
+            9: [
+                {q: "Which element has the highest melting point on the periodic table?", a: "Tungsten", opt: ["Carbon", "Tungsten", "Platinum", "Iron"]},
+                {q: "The 'Line of Control' (LoC) divides which two regions?", a: "Indian and Pakistani administered Kashmir", opt: ["India and China", "Indian and Pakistani administered Kashmir", "India and Bangladesh", "Punjab and Sindh"]},
+                {q: "What is the powerhouse of a plant cell besides mitochondria?", a: "Chloroplast", opt: ["Ribosome", "Chloroplast", "Golgi Body", "Vacuole"]},
+                {q: "Who propounded the Universal Law of Gravitation?", a: "Sir Isaac Newton", opt: ["Albert Einstein", "Johannes Kepler", "Sir Isaac Newton", "Galileo Galilei"]},
+                {q: "Which layer of the atmosphere contains the ozone layer?", a: "Stratosphere", opt: ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"]},
+                {q: "What is the SI unit of pressure?", a: "Pascal", opt: ["Joule", "Pascal", "Newton", "Watt"]},
+                {q: "In which year did the French Revolution begin?", a: "1789", opt: ["1776", "1789", "1804", "1815"]},
+                {q: "What is the chemical formula for baking soda?", a: "NaHCO3", opt: ["Na2CO3", "NaHCO3", "NaOH", "NaCl"]},
+                {q: "The tropic of cancer does NOT pass through which Indian state?", a: "Odisha", opt: ["Rajasthan", "Chhattisgarh", "Odisha", "Tripura"]},
+                {q: "Which blood cells are responsible for defending the body against pathogens?", a: "White Blood Cells", opt: ["Red Blood Cells", "Platelets", "White Blood Cells", "Plasma"]},
+                {q: "What is the decimal value of binary number 1010?", a: "10", opt: ["8", "10", "12", "6"]},
+                {q: "Who wrote the famous novel 'Wings of Fire'?", a: "Dr. A.P.J. Abdul Kalam", opt: ["Chetan Bhagat", "Rabindranath Tagore", "Dr. A.P.J. Abdul Kalam", "Ruskin Bond"]},
+                {q: "What is the standard atmospheric pressure at sea level in Pascals?", a: "101,325 Pa", opt: ["100,000 Pa", "101,325 Pa", "98,100 Pa", "105,000 Pa"]},
+                {q: "Which Indian movement was launched immediately after the failure of Cripps Mission?", a: "Quit India Movement", opt: ["Non-Cooperation", "Civil Disobedience", "Quit India Movement", "Khilafat Movement"]},
+                {q: "What type of mirror is used as a rear-view mirror in vehicles?", a: "Convex mirror", opt: ["Concave mirror", "Convex mirror", "Plane mirror", "Cylindrical mirror"]},
+                {q: "What is the capital of Australia?", a: "Canberra", opt: ["Sydney", "Melbourne", "Canberra", "Perth"]},
+                {q: "What is the pH value of pure neutral water at 25°C?", a: "7", opt: ["0", "7", "14", "5"]},
+                {q: "Which mountain range separates Europe from Asia?", a: "Ural Mountains", opt: ["Alps", "Himalayas", "Ural Mountains", "Andes"]},
+                {q: "The velocity of sound is highest in which medium?", a: "Solid", opt: ["Air", "Water", "Vacuum", "Solid"]},
+                {q: "Who is known as the 'Father of Indian Constitution'?", a: "Dr. B. R. Ambedkar", opt: ["Mahatma Gandhi", "Jawaharlal Nehru", "Dr. B. R. Ambedkar", "Sardar Vallabhbhai Patel"]}
+            ],
+            10: [
+                {q: "What is the product formed when ethanol reacts with hot concentrated sulfuric acid?", a: "Ethene", opt: ["Ethane", "Ethene", "Ethanoic Acid", "Ethyl Hydrogen Sulfate"]},
+                {q: "Which mirror always forms a virtual, erect, and diminished image?", a: "Convex mirror", opt: ["Concave mirror", "Convex mirror", "Plane mirror", "Parabolic mirror"]},
+                {q: "In Mendel's dihybrid cross, what is the phenotypic ratio in the F2 generation?", a: "9:3:3:1", opt: ["3:1", "1:2:1", "9:3:3:1", "1:1:1:1"]},
+                {q: "Which treaty recognized Greece as an independent nation in 1832?", a: "Treaty of Constantinople", opt: ["Treaty of Vienna", "Treaty of Constantinople", "Treaty of Versailles", "Treaty of Paris"]},
+                {q: "What is the electrical resistance of an ideal voltmeter?", a: "Infinite", opt: ["Zero", "Low", "Infinite", "Depends on voltage"]},
+                {q: "Which gland in the human body is known as the 'Master Gland'?", a: "Pituitary gland", opt: ["Thyroid gland", "Adrenal gland", "Pituitary gland", "Pancreas"]},
+                {q: "What is the chemical name of bleaching powder?", a: "Calcium oxychloride", opt: ["Calcium chloride", "Calcium oxychloride", "Calcium carbonate", "Calcium hydroxide"]},
+                {q: "The Non-Cooperation-Khilafat Movement began in which month and year?", a: "January 1921", opt: ["August 1920", "January 1921", "March 1919", "December 1922"]},
+                {q: "What is the focal length of a plane mirror?", a: "Infinite", opt: ["Zero", "Positive", "Infinite", "Negative"]},
+                {q: "Which metal exists in liquid state at room temperature?", a: "Mercury", opt: ["Gallium", "Mercury", "Sodium", "Bromine"]},
+                {q: "What is the primary function of the renal vein?", a: "Carries filtered blood away from the kidney", opt: ["Brings unfiltered blood to the kidney", "Carries filtered blood away from the kidney", "Transports urine to bladder", "Secretes renin"]},
+                {q: "Who designed the famous 'Swadeshi flag' during the national movement in 1921?", a: "Mahatma Gandhi", opt: ["Rabindranath Tagore", "Mahatma Gandhi", "Pingali Venkayya", "Jawaharlal Nehru"]},
+                {q: "What is the maximum number of electrons in the 'M' shell according to the Bohr-Bury scheme?", a: "18", opt: ["8", "18", "32", "2"]},
+                {q: "Which soil type is best suited for growing cotton?", a: "Black soil", opt: ["Red soil", "Laterite soil", "Black soil", "Alluvial soil"]},
+                {q: "What is the refractive index of diamond approximately?", a: "2.42", opt: ["1.52", "1.77", "2.42", "3.00"]},
+                {q: "Which hormone regulates blood sugar levels?", a: "Insulin", opt: ["Glucagon", "Insulin", "Thyroxine", "Adrenaline"]},
+                {q: "What type of reaction is the burning of natural gas?", a: "Exothermic", opt: ["Endothermic", "Exothermic", "Photochemical", "Displacement"]},
+                {q: "In which year was the Rowlatt Act passed?", a: "1919", opt: ["1915", "1919", "1921", "1925"]},
+                {q: "What is the power of a lens having a focal length of -20 cm?", a: "-5 D", opt: ["+5 D", "-5 D", "+2 D", "-2 D"]},
+                {q: "Which international organization publishes the Human Development Report (HDR)?", a: "UNDP", opt: ["World Bank", "IMF", "UNDP", "UNESCO"]}
+            ],
+            11: [
+                {q: "What is the dimensionality of universal gravitational constant (G)?", a: "[M^-1 L^3 T^-2]", opt: ["[M L^2 T^-2]", "[M^-1 L^3 T^-2]", "[M L^-2 T^-2]", "[M^-1 L^2 T^-2]"]},
+                {q: "Which cell organelle is devoid of a membrane?", a: "Ribosome", opt: ["Lysosome", "Nucleus", "Ribosome", "Endoplasmic Reticulum"]},
+                {q: "What is the oxidation state of Chromium in K2Cr2O7?", a: "+6", opt: ["+3", "+6", "+7", "+2"]},
+                {q: "What type of economic system is characterized by central planning?", a: "Socialist economy", opt: ["Capitalist economy", "Socialist economy", "Mixed economy", "Free-market economy"]},
+                {q: "According to the Aufbau principle, electrons fill orbitals in order of increasing:", a: "(n + l)", opt: ["n only", "l only", "(n + l)", "(n - l)"]},
+                {q: "What is the common name of Solid CO2?", a: "Dry ice", opt: ["Quicklime", "Dry ice", "Laughing gas", "Potash alum"]},
+                {q: "Which plant hormone induces dormancy in seeds and buds?", a: "Abscisic acid", opt: ["Auxin", "Gibberellin", "Cytokinin", "Abscisic acid"]},
+                {q: "What is the term for the total volume of air a person can exhale after maximum inhalation?", a: "Vital capacity", opt: ["Tidal volume", "Residual volume", "Vital capacity", "Total lung capacity"]},
+                {q: "Who is recognized as the father of modern taxonomy?", a: "Carolus Linnaeus", opt: ["Aristotle", "Charles Darwin", "Carolus Linnaeus", "Gregor Mendel"]},
+                {q: "What is the value of gas constant R in SI units (J mol^-1 K^-1)?", a: "8.314", opt: ["0.0821", "8.314", "1.987", "6.022"]},
+                {q: "In a thermodynamic process, work done is path independent if the process is:", a: "Not possible, work is always path dependent", opt: ["Isothermal", "Adiabatic", "Isobaric", "Not possible, work is always path dependent"]},
+                {q: "Which article of the Indian Constitution deals with the Right to Equality?", a: "Article 14-18", opt: ["Article 12-35", "Article 14-18", "Article 19-22", "Article 32"]},
+                {q: "What is the chemical name of oil of vitriol?", a: "Sulfuric acid", opt: ["Hydrochloric acid", "Nitric acid", "Sulfuric acid", "Phosphoric acid"]},
+                {q: "What is the primary currency of economic stability measured by the Central Bank?", a: "Money supply", opt: ["Inflation rate", "Money supply", "Foreign exchange", "Tax revenues"]},
+                {q: "What is the angle between centripetal acceleration and tangential acceleration?", a: "90 degrees", opt: ["0 degrees", "45 degrees", "90 degrees", "180 degrees"]},
+                {q: "Which enzyme is responsible for the fixation of CO2 in C3 plants?", a: "RuBisCO", opt: ["Hexokinase", "RuBisCO", "Pepcase", "Amylase"]},
+                {q: "What happens to the kinetic energy of an ideal gas when absolute temperature is doubled?", a: "Doubled", opt: ["Quadrupled", "Halved", "Doubled", "Remains unchanged"]},
+                {q: "Which type of bonding is present in ice crystals?", a: "Hydrogen bonding", opt: ["Ionic bonding", "Covalent bonding", "Hydrogen bonding", "Metallic bonding"]},
+                {q: "What is the nodal agency for calculating GDP in India?", a: "NSO (National Statistical Office)", opt: ["RBI", "Ministry of Finance", "NSO (National Statistical Office)", "NITI Aayog"]},
+                {q: "What is the coefficient of restitution for a perfectly elastic collision?", a: "1", opt: ["0", "0.5", "1", "Infinity"]}
+            ],
+            12: [
+                {q: "What is the hybridization of carbon in a diamond crystal lattice?", a: "sp3", opt: ["sp", "sp2", "sp3", "sp3d"]},
+                {q: "Which electromagnetic waves are used in RADAR systems for aircraft navigation?", a: "Microwaves", opt: ["Radio waves", "Microwaves", "Infrared waves", "X-rays"]},
+                {q: "What is the net electric flux through a closed surface enclosing an electric dipole?", a: "Zero", opt: ["Maximum", "Zero", "Dependent on dipole moment", "Infinite"]},
+                {q: "What is the primary neurotransmitter at the neuromuscular junction in humans?", a: "Acetylcholine", opt: ["Dopamine", "Serotonin", "Acetylcholine", "Adrenaline"]},
+                {q: "Which enzyme catalyses the replication of DNA strands?", a: "DNA polymerase", opt: ["RNA polymerase", "DNA ligase", "DNA polymerase", "Helicase"]},
+                {q: "What is the IUPAC name of acetone?", a: "Propan-2-one", opt: ["Propanal", "Propan-2-one", "Propan-1-ol", "Propanone-2"]},
+                {q: "In an N-type semiconductor, the majority charge carriers are:", a: "Electrons", opt: ["Holes", "Electrons", "Protons", "Neutrons"]},
+                {q: "Which constitutional amendment is known as the 'Mini Constitution' of India?", a: "42nd Amendment", opt: ["44th Amendment", "42nd Amendment", "86th Amendment", "73rd Amendment"]},
+                {q: "What is the product of mass and acceleration in relativistic mechanics at speeds close to light?", a: "Force", opt: ["Momentum change rate", "Force", "Constant value", "Zero"]},
+                {q: "Which deficiency disease is caused by lack of Vitamin B12?", a: "Pernicious anemia", opt: ["Scurvy", "Beriberi", "Pernicious anemia", "Rickets"]},
+                {q: "What is the coordination number of Na+ in NaCl crystal structure?", a: "6", opt: ["4", "6", "8", "12"]},
+                {q: "What type of lens system is used to correct myopia (nearsightedness)?", a: "Concave lens", opt: ["Convex lens", "Concave lens", "Cylindrical lens", "Bifocal lens"]},
+                {q: "Which macroeconomic policy tool is controlled directly by commercial banks?", a: "None, tools are controlled by the Central Bank", opt: ["Repo rate", "Cash Reserve Ratio", "None, tools are controlled by the Central Bank", "Open market operations"]},
+                {q: "What is the value of the magnetic susceptibility of a diamagnetic substance?", a: "Small and negative", opt: ["Large and positive", "Small and positive", "Small and negative", "Zero"]},
+                {q: "Which type of ecological pyramid is always upright?", a: "Pyramid of Energy", opt: ["Pyramid of Number", "Pyramid of Biomass", "Pyramid of Energy", "All types can invert"]},
+                {q: "What is the major product formed when alkyl halide reacts with alcoholic KOH?", a: "Alkene", opt: ["Alkane", "Alkene", "Alkyne", "Ether"]},
+                {q: "What is the threshold frequency of a photoelectric surface dependent upon?", a: "Nature of the metal surface", opt: ["Intensity of incident light", "Frequency of incident light", "Nature of the metal surface", "Distance from source"]},
+                {q: "Who drafted the Objectives Resolution in the Constituent Assembly?", a: "Jawaharlal Nehru", opt: ["Dr. B. R. Ambedkar", "Jawaharlal Nehru", "Sardar Patel", "Rajendra Prasad"]},
+                {q: "What is the half-life of a first-order reaction proportional to?", a: "Independent of initial concentration", opt: ["Initial concentration", "Inverse of initial concentration", "Independent of initial concentration", "Square of initial concentration"]},
+                {q: "Which international monetary body acts as the 'lender of last resort'?", a: "International Monetary Fund (IMF)", opt: ["World Bank", "International Monetary Fund (IMF)", "WTO", "Asian Development Bank"]}
+            ]
+        };
+
+        let currentGrade = null;
+        let questionIndex = 0;
+        let score = 0;
+        let activeQuestions = [];
+        let locked = false;
+
+        const selectionView = document.getElementById('selection-view');
+        const quizBox = document.getElementById('quiz-box');
+        const resultBox = document.getElementById('result-box');
+
+        function initQuiz(grade) {
+            currentGrade = grade;
+            activeQuestions = database[grade];
+            questionIndex = 0;
+            score = 0;
+            
+            document.getElementById('grade-indicator').innerText = `Class ${grade} Quiz`;
+            document.getElementById('score-indicator').innerText = `Score: 0`;
+            
+            selectionView.style.display = 'none';
+            resultBox.style.display = 'none';
+            quizBox.style.display = 'block';
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            locked = false;
+            document.getElementById('next-btn').style.display = 'none';
+            
+            const currentQ = activeQuestions[questionIndex];
+            document.getElementById('progress-indicator').innerText = `Question ${questionIndex + 1} of ${activeQuestions.length}`;
+            document.getElementById('question-text').innerText = `Q${questionIndex + 1}: ${currentQ.q}`;
+
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            // Shuffle options for engagement
+            let options = [...currentQ.opt];
+            options.sort(() => Math.random() - 0.5);
+
+            options.forEach(optText => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = optText;
+                btn.onclick = () => selectOption(btn, optText, currentQ.a);
+                container.appendChild(btn);
+            });
+        }
+
+        function selectOption(button, chosen, correct) {
+            if (locked) return;
+            locked = true;
+
+            const allButtons = document.querySelectorAll('.option-btn');
+            
+            if (chosen === correct) {
+                button.classList.add('correct');
+                score++;
+                document.getElementById('score-indicator').innerText = `Score: ${score}`;
+            } else {
+                button.classList.add('wrong');
+                allButtons.forEach(btn => {
+                    if (btn.innerText === correct) {
+                        btn.classList.add('correct');
+                    }
+                });
             }
-            let buttons = document.getElementsByClassName("tab-btn");
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].classList.remove("active");
+
+            document.getElementById('next-btn').style.display = 'block';
+        }
+
+        function handleNext() {
+            questionIndex++;
+            if (questionIndex < activeQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
             }
-            document.getElementById(className).classList.add("active");
-            evt.currentTarget.classList.add("active");
+        }
+
+        function showResults() {
+            quizBox.style.display = 'none';
+            resultBox.style.display = 'block';
+            document.getElementById('final-score-text').innerText = `You scored ${score} out of ${activeQuestions.length}!`;
+        }
+
+        function returnHome() {
+            resultBox.style.display = 'none';
+            selectionView.style.display = 'block';
         }
     </script>
 </body>
